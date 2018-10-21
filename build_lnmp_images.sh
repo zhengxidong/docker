@@ -1,0 +1,2 @@
+#!/bin/bash
+docker build -t lnmp:1.0.0 --build-arg PHP_VER=7.2.8 --build-arg NGINX_VER=1.15.2 --build-arg MYSQL_VER=5.7.23 --build-arg REDIS_VER=4.0.11 --build-arg PHPMYADMIN_VER=4.7.6 --build-arg REDIS_VER=123456 --build-arg ROOT_PASSWORD=123456 --build-arg GO_VER=1.10.3 --build-arg NODE_VER=8.11.4 --build-arg MONGODB_VER=4.0.1 --build-arg XHPROF_VER=1.2 --build-arg HIREDIS_VER=0.13.3 --build-arg SWOOLE_VER=4.0.4 .

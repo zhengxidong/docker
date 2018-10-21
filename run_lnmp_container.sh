@@ -1,0 +1,2 @@
+#!/bin/bash
+docker run -p 8080:80 -p 23:22  -p 6379:6379 -p 27017:27017 --name lnmp -itd -v /home/docker/etc/nginx:/etc/nginx -v /home/docker/data/mysql:/data/mysql -v /home/docker/data/mongodb:/data/mongodb -v /home/docker/data/log:/var/log -v /home/www:/usr/local/nginx/html lnmp:1.0.0
