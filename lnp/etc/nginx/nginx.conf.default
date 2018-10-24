@@ -1,7 +1,7 @@
 
 #user  nobody;
 worker_processes  1;
-daemon off;
+
 #error_log  logs/error.log;
 #error_log  logs/error.log  notice;
 #error_log  logs/error.log  info;
@@ -13,10 +13,11 @@ events {
     worker_connections  1024;
 }
 
+
 http {
     include       mime.types;
     default_type  application/octet-stream;
-    client_max_body_size 100m;
+
     #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
     #                  '$status $body_bytes_sent "$http_referer" '
     #                  '"$http_user_agent" "$http_x_forwarded_for"';
@@ -39,52 +40,9 @@ http {
 
         #access_log  logs/host.access.log  main;
 
-        root   html;
-        index  index.html index.htm index.php;
-
-        location /phpmyadmin {
-            alias /var/tools/phpmyadmin;
-            index index.php;
-        }
-
-        location ~ /phpmyadmin.+\.php.*$ {
-            if ($fastcgi_script_name ~ /phpmyadmin/(.+\.php.*)$) {
-                set $valid_fastcgi_script_name $1;
-            }
-            fastcgi_pass  127.0.0.1:9000;
-            fastcgi_index  index.php;
-            fastcgi_param  SCRIPT_FILENAME  /var/tools/phpmyadmin/$valid_fastcgi_script_name;
-            include  fastcgi_params;
-        }
-
-        location /phpredisadmin {
-            alias /var/tools/phpredisadmin;
-            index index.php;
-        }
-
-        location ~ /phpredisadmin.+\.php.*$ {
-            if ($fastcgi_script_name ~ /phpredisadmin/(.+\.php.*)$) {
-                set $valid_fastcgi_script_name $1;
-            }
-            fastcgi_pass  127.0.0.1:9000;
-            fastcgi_index  index.php;
-            fastcgi_param  SCRIPT_FILENAME  /var/tools/phpredisadmin/$valid_fastcgi_script_name;
-            include  fastcgi_params;
-        }
-
-        location /xhprof_html {
-            alias /var/tools/xhprof_html;
-            index index.php;
-        }
-
-        location ~ /xhprof_html.+\.php.*$ {
-            if ($fastcgi_script_name ~ /xhprof_html/(.+\.php.*)$) {
-                set $valid_fastcgi_script_name $1;
-            }
-            fastcgi_pass  127.0.0.1:9000;
-            fastcgi_index  index.php;
-            fastcgi_param  SCRIPT_FILENAME  /var/tools/xhprof_html/$valid_fastcgi_script_name;
-            include  fastcgi_params;
+        location / {
+            root   html;
+            index  index.html index.htm;
         }
 
         #error_page  404              /404.html;
@@ -104,12 +62,13 @@ http {
 
         # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
         #
-        location ~ \.php$ {
-            fastcgi_pass   127.0.0.1:9000;
-            fastcgi_index  index.php;
-            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-            include        fastcgi_params;
-        }
+        #location ~ \.php$ {
+        #    root           html;
+        #    fastcgi_pass   127.0.0.1:9000;
+        #    fastcgi_index  index.php;
+        #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+        #    include        fastcgi_params;
+        #}
 
         # deny access to .htaccess files, if Apache's document root
         # concurs with nginx's one
@@ -154,5 +113,5 @@ http {
     #        index  index.html index.htm;
     #    }
     #}
-    include sites.d/*.conf;
+
 }
