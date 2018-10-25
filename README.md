@@ -54,7 +54,7 @@ LNMP Dockerfile
 1. 远程获取镜像(推荐)
     ```bash 
     $ git clone https://github.com/zhengxidong/docker.git
-    $ cd /path/to/docker
+    $ cd lnmp
     ```
     
 2. 自行构建
