@@ -54,13 +54,13 @@ LNMP Dockerfile
 1. 远程获取镜像(推荐)
     ```bash 
     $ git clone https://github.com/zhengxidong/docker.git
-    $ cd lnmp
+    $ cd docker/lnmp
     ```
     
 2. 自行构建
     ```bash
     $ git clone https://github.com/zhengxidong/docker.git
-    $ cd /lnmp
+    $ cd docker/lnmp
     $ docker build -t lnmp:1.0.0 .
     ```
     P.S 
@@ -74,12 +74,12 @@ LNMP Dockerfile
 -------------------
 
 ```bash
-  $ docker run -p 80:80 -p 23:22 -p 3306:3306 -p 6379:6379 -p 27017:27017 --name lnmp -itd -v /lnmp/etc/nginx:/etc/nginx -v /lnmp/data/mysql:/data/mysql -v /lnmp/data/mongodb:/data/mongodb -v /lnmp/data/log:/var/log -v /lnmp/www:/usr/local/nginx/html lnmp:1.0.0
+  $ docker run -p 80:80 -p 23:22 -p 3306:3306 -p 6379:6379 -p 27017:27017 --name lnmp -itd -v /docker/lnmp/etc/nginx:/etc/nginx -v /docker/lnmp/data/mysql:/data/mysql -v /docker/lnmp/data/mongodb:/data/mongodb -v /docker/lnmp/data/log:/var/log -v /docker/lnmp/www:/usr/local/nginx/html lnmp:1.0.0
 ```
  P.S 
  
  若使用远程获取镜像请将liufee/feehi修改成registry.cn-hangzhou.aliyuncs.com/liufee/feehi
- 默认web目录为/usr/local/nginx/html,若需要配置多个vhost可以映射其他web目录进去.如: -v /path/to/sites:/www,然后在/etc/nginx/site.d中增加vhost配置
+ 默认web目录为/usr/local/nginx/html,若需要配置多个vhost可以映射其他web目录进去.如: -v /path/to/sites:/www,然后在/etc/nginx/conf.d中增加vhost配置
 
 
 xhprof使用方法
