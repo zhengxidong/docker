@@ -53,29 +53,28 @@ LNMP Dockerfile
 ------------------------
 1. 远程获取镜像(推荐)
     ```bash 
-    $ docker pull registry.cn-hangzhou.aliyuncs.com/liufee/feehi 
-    $ git clone https://github.com/liufee/docker.git
+    $ git clone https://github.com/zhengxidong/docker.git
     $ cd /path/to/docker
     ```
     
 2. 自行构建
     ```bash
-    $ git clone https://github.com/liufee/docker.git
-    $ cd /path/to/docker
-    $ docker build -t liufee/feehi ./
+    $ git clone https://github.com/zhengxidong/docker.git
+    $ cd /lnmp
+    $ docker build -t lnmp:1.0.0 .
     ```
     P.S 
     
     自行构建，如果某一步骤失败, 再来一次。(因为你懂的原因，pecl.php.net,phpmyadmin.net,repo.mysql.com不稳定，造成下载某些扩展的时候失败退出。windows下使用ss代理切记勾选全局使用代理并重启cmd)
     
-    强烈建议在执行cd /path/to/docker命令前，执行export http_proxy=http://ip:1087;export https_proxy=http://ip:1087;伟大的GFW，最好带个梯子。ip通常为127.0.0.1
+    强烈建议在执行cd /lnmp命令前，执行export http_proxy=http://ip:1087;export https_proxy=http://ip:1087;伟大的GFW，最好带个梯子。ip通常为127.0.0.1
 
 
 运行容器
 -------------------
 
 ```bash
-  $ docker run -h feehi -p 80:80 -p 23:22 -p 3306:3306 -p 6379:6379 -p 27017:27017 --name feehi -itd -v /path/to/docker/etc/nginx:/etc/nginx -v /path/to/docker/data/mysql:/data/mysql -v /path/to/docker/data/mongodb:/data/mongodb -v /path/to/docker/data/log:/var/log -v /path/to/www:/usr/local/nginx/html liufee/feehi
+  $ docker run -p 80:80 -p 23:22 -p 3306:3306 -p 6379:6379 -p 27017:27017 --name lnmp -itd -v /lnmp/etc/nginx:/etc/nginx -v /lnmp/data/mysql:/data/mysql -v /lnmp/data/mongodb:/data/mongodb -v /lnmp/data/log:/var/log -v /lnmp/www:/usr/local/nginx/html lnmp:1.0.0
 ```
  P.S 
  
