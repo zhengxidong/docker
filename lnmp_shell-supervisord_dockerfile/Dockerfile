@@ -1,5 +1,5 @@
 FROM centos:7
-MAINTAINER wwtg99 <wwtg99@126.com>
+MAINTAINER zxd <zhenxidog@163.com>
 
 # Update yum repo
 # RUN wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo

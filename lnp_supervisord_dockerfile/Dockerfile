@@ -2,7 +2,7 @@ ARG OS_VER=latest
 
 
 FROM centos:$OS_VER
-MAINTAINER zxd zhenxidog@163.com
+MAINTAINER zxd <zhenxidog@163.com>
 
 
 #root用户密码
