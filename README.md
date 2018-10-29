@@ -22,6 +22,20 @@ php环境基本服务简称_其它服务简称_服务启动方式名称_dockerfi
 
 使用`-`隔开表示脚本配合进程服务启动。
 
+## 目录结构
+
+~~~
+docker-dev  仓库
+├─lnmp7.2_rgmnpx_supervisord_dockerfile   php7.2相关文件
+│  ├─data               数据存储
+|  |  └─log
+│  ├─etc                ngixn配置文件目录
+│  │  └─nginx           
+│  ├─Dockerfile         Dockerfile文件
+│  ├─build_lnmp_images.sh    创建新镜像脚本
+│  └─run_lnmp_container.sh   创建新容器脚本
+
+~~~
 
 ## 目录说明
 ### [lnmp7.2_rgmnpx_supervisord_dockerfile](https://github.com/zhengxidong/docker/tree/master/lnmp_rgmnpx_supervisord_dockerfile)
