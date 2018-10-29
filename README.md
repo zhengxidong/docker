@@ -20,7 +20,7 @@ php环境基本服务简称_其它服务简称_服务启动方式名称_dockerfi
 
 
 ## 目录说明
-### lnmp_rgmnpx_supervisord_dockerfile
+### [lnmp_rgmnpx_supervisord_dockerfile](https://github.com/zhengxidong/docker/tree/master/lnmp_rgmnpx_supervisord_dockerfile)
 
 基于最新版CentOS官方镜像
 
@@ -28,19 +28,19 @@ php环境基本服务简称_其它服务简称_服务启动方式名称_dockerfi
 
 版本：
 
-* php7
-* nginx
-* mysql
-* redis
+* php7.2.8
+* nginx1.15.2
+* mysql5.7.23
+* redis4.0.11
 * openssh
-* go
+* go1.10.3
 * crond
-* swoole
-* mongodb
-* node
-* phpmyadmin
-* phpredisadmin
-* xhprof
+* swoole4.0.4
+* mongodb4.0.1
+* node8.11.4
+* phpmyadmin4.7.6
+* phpredisadmin0.13.3
+* xhprof1.2
 
 服务启动方式
 
@@ -53,9 +53,9 @@ php环境基本服务简称_其它服务简称_服务启动方式名称_dockerfi
 
 版本：
 
-* php7
-* nginx
-* swoole
+* php7.2.8
+* nginx1.15.2
+* swoole4.0.4
 
 服务启动方式
 
