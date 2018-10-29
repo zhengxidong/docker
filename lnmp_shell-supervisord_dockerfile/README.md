@@ -1,4 +1,4 @@
-# docker-nginx-php7
+# lnmp_shell-supervisord_dockerfile
 
 ## Description
 Docker image support Nginx and PHP 7.1 depends on Centos 7. Composer and supervisor added, very convenient for Laravel projects.
