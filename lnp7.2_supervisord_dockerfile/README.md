@@ -2,7 +2,7 @@
 =================
 
 
-## lnp_supervisord_dockerfile
+## lnp7.2_supervisord_dockerfile
 
 基于最新版CentOS官方镜像
 
