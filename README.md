@@ -20,7 +20,7 @@ php环境基本服务简称_其它服务简称_服务启动方式名称_dockerfi
 
 
 ## 目录说明
-### [lnmp_rgmnpx_supervisord_dockerfile](https://github.com/zhengxidong/docker/tree/master/lnmp_rgmnpx_supervisord_dockerfile)
+### [lnmp7.2_rgmnpx_supervisord_dockerfile](https://github.com/zhengxidong/docker/tree/master/lnmp_rgmnpx_supervisord_dockerfile)
 
 基于最新版CentOS官方镜像
 
@@ -46,7 +46,7 @@ php环境基本服务简称_其它服务简称_服务启动方式名称_dockerfi
 
    supervisord启动
 
-### [lnp_supervisord_dockerfile](https://github.com/zhengxidong/docker/tree/master/lnp_supervisord_dockerfile)
+### [lnp7.2_supervisord_dockerfile](https://github.com/zhengxidong/docker/tree/master/lnp_supervisord_dockerfile)
 
 基于最新版CentOS官方镜像
 包含php,nginx,crond,swoole服务
@@ -62,7 +62,7 @@ php环境基本服务简称_其它服务简称_服务启动方式名称_dockerfi
  supervisord启动
 
 
-### [lnmp_shell-supervisord_dockerfile](https://github.com/zhengxidong/docker/tree/master/lnmp_shell-supervisord_dockerfile)
+### [lnmp7.2_shell-supervisord_dockerfile](https://github.com/zhengxidong/docker/tree/master/lnmp_shell-supervisord_dockerfile)
 
 
 基于最新版CentOS官方镜像
@@ -77,3 +77,17 @@ php环境基本服务简称_其它服务简称_服务启动方式名称_dockerfi
 服务启动方式
 
  shell配合supervisord启动   
+
+### [lnp5.6_supervisord_dockerfile](https://github.com/zhengxidong/docker/tree/master/lnp5.6_supervisord_dockerfile)
+
+基于最新版CentOS官方镜像
+包含php，nginx服务
+
+版本：
+
+* php5.6
+* nginx1.15.2
+
+服务启动方式
+
+  supervisord启动   
