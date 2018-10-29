@@ -1,4 +1,4 @@
-# docker-nginx-php7
+# lnmp_shell-supervisord_dockerfile
 
 ## Description
 Docker image support Nginx and PHP 7.1 depends on Centos 7. Composer and supervisor added, very convenient for Laravel projects.
@@ -78,9 +78,3 @@ If you have your own scripts to run before server started, add them to script.sh
 ```
 docker run -d --name nginx-php -p 8080:80 -v /your_script_dir:/data/script wwtg99/docker-nginx-php7:latest
 ```
-
-## Thanks
-[Skiychan](https://github.com/skiy-dockerfile/nginx-php7)
-
-## Author
-[wwtg99](http://52jing.wang)

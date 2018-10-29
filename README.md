@@ -6,13 +6,13 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
 
 **在此说明下，build过程中的安装方式有三种：**
 
-1、通过yum安装方式进行安装
+* 1、通过yum安装方式进行安装
 
-2、通过curl下载源码包编译安装
+* 2、通过curl下载源码包编译安装
 
-3、手动下载好源码包，build的过程中，将源码包CP到镜像中进行编译安装（推荐这种方式，因为以上两种需要更新一些yum源或者下载一些包，网络不好情况下，难以build出一个镜像）
+* 3、手动下载好源码包，build的过程中，将源码包CP到镜像中进行编译安装（推荐这种方式，因为以上两种需要更新一些yum源或者下载一些包，网络不好情况下，难以build出一个镜像）
 
-**目录格式:**
+**目录名格式:**
 php环境基本服务简称_其它服务简称_服务启动方式名称_dockerfile
 
 **服务启动方式:**
@@ -20,7 +20,7 @@ php环境基本服务简称_其它服务简称_服务启动方式名称_dockerfi
 
 
 ## 目录说明
-### lnmp_rgmnpx_supervisord_dockerfile
+### [lnmp_rgmnpx_supervisord_dockerfile](https://github.com/zhengxidong/docker/tree/master/lnmp_rgmnpx_supervisord_dockerfile)
 
 基于最新版CentOS官方镜像
 
@@ -28,41 +28,41 @@ php环境基本服务简称_其它服务简称_服务启动方式名称_dockerfi
 
 版本：
 
-* php7
-* nginx
-* mysql
-* redis
+* php7.2.8
+* nginx1.15.2
+* mysql5.7.23
+* redis4.0.11
 * openssh
-* go
+* go1.10.3
 * crond
-* swoole
-* mongodb
-* node
-* phpmyadmin
-* phpredisadmin
-* xhprof
+* swoole4.0.4
+* mongodb4.0.1
+* node8.11.4
+* phpmyadmin4.7.6
+* phpredisadmin0.13.3
+* xhprof1.2
 
 服务启动方式
 
    supervisord启动
 
-### lnp_supervisord_dockerfile
+### [lnp_supervisord_dockerfile](https://github.com/zhengxidong/docker/tree/master/lnp_supervisord_dockerfile)
 
 基于最新版CentOS官方镜像
 包含php,nginx,crond,swoole服务
 
 版本：
 
-* php7
-* nginx
-* swoole
+* php7.2.8
+* nginx1.15.2
+* swoole4.0.4
 
 服务启动方式
 
  supervisord启动
 
 
-### lnmp_shell-supervisord_dockerfile
+### [lnmp_shell-supervisord_dockerfile](https://github.com/zhengxidong/docker/tree/master/lnmp_shell-supervisord_dockerfile)
 
 
 基于最新版CentOS官方镜像
