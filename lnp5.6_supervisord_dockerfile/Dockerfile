@@ -106,8 +106,10 @@ RUN cd /usr/src \
     && rm -rf /usr/src/nginx.tar.gz && rm -rf /usr/src/nginx \
 
     # php redis扩展
-    && /usr/local/php/bin/pecl install redis && echo "extension=redis.so" >> /etc/php/php.ini 
-
+    && /usr/local/php/bin/pecl install redis && echo "extension=redis.so" >> /etc/php/php.ini \
+    # php memcache扩展
+    && /usr/local/php/bin/pecl install memcache && echo "extension=memcache.so" >> /etc/php/php.ini 
+    
 #服务器基础设置
 RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezonesource \
