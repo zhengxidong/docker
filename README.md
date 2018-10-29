@@ -46,7 +46,7 @@ php环境基本服务简称_其它服务简称_服务启动方式名称_dockerfi
 
    supervisord启动
 
-### lnp_supervisord_dockerfile
+### [lnp_supervisord_dockerfile](https://github.com/zhengxidong/docker/tree/master/lnp_supervisord_dockerfile)
 
 基于最新版CentOS官方镜像
 包含php,nginx,crond,swoole服务
@@ -62,7 +62,7 @@ php环境基本服务简称_其它服务简称_服务启动方式名称_dockerfi
  supervisord启动
 
 
-### lnmp_shell-supervisord_dockerfile
+### [lnmp_shell-supervisord_dockerfile](https://github.com/zhengxidong/docker/tree/master/lnmp_shell-supervisord_dockerfile)
 
 
 基于最新版CentOS官方镜像
