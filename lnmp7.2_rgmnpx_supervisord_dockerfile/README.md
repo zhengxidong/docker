@@ -1,4 +1,4 @@
-LNMP Dockerfile
+lnmp7.2_rgmnpx_supervisord_dockerfile
 =================
 
 基于最新版CentOS官方镜像
