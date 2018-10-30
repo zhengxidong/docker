@@ -38,7 +38,7 @@ docker-dev  仓库
 ~~~
 
 ## 目录说明
-### [lnmp7.2_rgmnpx_supervisord_dockerfile](https://github.com/zhengxidong/docker/tree/master/lnmp_rgmnpx_supervisord_dockerfile)
+### [lnmp7.2_rgmnpx_supervisord_dockerfile](https://github.com/zhengxidong/docker-dev/tree/master/lnmp7.2_rgmnpx_supervisord_dockerfile)
 
 基于最新版CentOS官方镜像
 
@@ -64,7 +64,7 @@ docker-dev  仓库
 
    supervisord启动
 
-### [lnp7.2_supervisord_dockerfile](https://github.com/zhengxidong/docker/tree/master/lnp_supervisord_dockerfile)
+### [lnp7.2_supervisord_dockerfile](https://github.com/zhengxidong/docker-dev/tree/master/lnp7.2_supervisord_dockerfile)
 
 基于最新版CentOS官方镜像
 包含php,nginx,crond,swoole服务
@@ -80,7 +80,7 @@ docker-dev  仓库
  supervisord启动
 
 
-### [lnmp7.2_shell-supervisord_dockerfile](https://github.com/zhengxidong/docker/tree/master/lnmp_shell-supervisord_dockerfile)
+### [lnmp7.2_shell-supervisord_dockerfile](https://github.com/zhengxidong/docker-dev/tree/master/lnmp7.2_shell-supervisord_dockerfile)
 
 
 基于最新版CentOS官方镜像
