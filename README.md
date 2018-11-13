@@ -4,7 +4,7 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
 
 目前 Docker 有两套版本，一套是早期的 Docker 程序，版本号为 v1.*，CentOS 系统使用 yum 安装的默认就是这个版本。另一套是后期发展的整个 Docker 生态，版本号是 v17.*，分为社区版(Docker-CE)及企业版(Docker-EE)。本文以下使用 Linux CentOS 7 系统（其他 Linux 系统的使用方式类似），Docker 社区版 Docker-CE v17.12，Docker-CE 各个系统的安装方式请参考 [Docker 安装文档](https://link.zhihu.com/?target=https%3A//docs.docker.com/install/)。
 
-**在此说明下，build过程中的安装方式有三种：**
+**在此说明下，构建镜像过程中的安装方式有三种：**
 
 * 1、通过yum安装方式进行安装
 
