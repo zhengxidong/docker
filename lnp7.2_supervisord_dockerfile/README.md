@@ -12,7 +12,7 @@
 
 ### 拉取镜像
 ```js
-docker pull zhengxidong/lnp7.2
+docker pull zhengxidong/lnp7.2:1.0
 ```
 
 ### 创建目录(此目录为站点文件)
