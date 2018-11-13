@@ -15,7 +15,7 @@
 docker pull zhengxidong/lnp7.2
 ```
 
-创建目录
+创建目录(此目录为站点文件)
 
   在home目录下创建html目录
 
