@@ -38,7 +38,7 @@ docker run -d -p 80:80 --name lnp7.2 -v /home/html:/usr/local/nginx/html zhengxi
 ```js
 /usr/local/nginx/html
 ```
-## nginx命令
+### nginx命令
 
 ```
 /usr/local/nginx/sbin/nginx -s reload|reopen|stop|quit  #重新加载配置|重启|停止|退出 nginx
