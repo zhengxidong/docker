@@ -30,10 +30,12 @@ docker run -d -p 80:80 --name lnp7.2 -v /home/html:/usr/local/nginx/html zhengxi
 ```
 
 * 宿主机站点目录
-
+```js
 /home/html
-
+```
 * 容器内站点目录
 
+```js
 /usr/local/nginx/html
+```
    
