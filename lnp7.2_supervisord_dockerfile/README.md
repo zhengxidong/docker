@@ -29,7 +29,7 @@ mkdir /home/html
 docker run -d -p 80:80 --name lnp7.2 -v /home/html:/usr/local/nginx/html zhengxidong/lnp7.2:1.0
 ```
 
-* 宿主机站点目录
+* 宿主机站点目录(可自定义)
 ```js
 /home/html
 ```
