@@ -54,7 +54,10 @@ docker run -d -p 80:80 --name lnp7.2 -v /home/html:/usr/local/nginx/html zhengxi
 
 ##### php
 
-待续
+1. php配置文件目录
+```js
+/etc/php
+```
 
 ### nginx命令
 
