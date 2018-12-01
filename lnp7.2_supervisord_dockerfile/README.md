@@ -46,10 +46,11 @@ docker run -d -p 80:80 --name lnp7.2 -v /home/html:/usr/local/nginx/html zhengxi
 ```js
 /etc/nginx
 ```
-* 日志目录
-```js
-/var/log/nginx
-```
+3. 日志目录
+
+ ```js
+ /var/log/nginx
+ ```
 
 ##### php
 
