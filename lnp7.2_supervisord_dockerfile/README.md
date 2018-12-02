@@ -17,10 +17,10 @@ docker pull zhengxidong/lnp7.2:1.0
 
 ### 创建目录(此目录为站点文件)
 
-  在home目录下创建html目录
+  在home目录下创建站点目录
 
 ```js
-mkdir /home/html
+mkdir /home/html/itellyou.site
 ```
 
 ### 运行容器
@@ -33,7 +33,7 @@ docker run -d -p 80:80 --name lnp7.2 -v /home/html:/usr/local/nginx/html zhengxi
 
 1. 站点目录(可自定义)
 ```js
-/home/html
+/home/html/itellyou.site
 ```
 #### 容器内
 
