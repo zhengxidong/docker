@@ -106,8 +106,13 @@ RUN cd /usr/src \
     && curl -o nginx.tar.gz http://nginx.org/download/nginx-${NGINX_VER}.tar.gz -L \
     && mkdir nginx && tar -xzvf nginx.tar.gz -C ./nginx --strip-components 1 \
     && cd nginx \
-    && ./configure --prefix=/usr/local/nginx --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log \
-        --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/lock/nginx.lock \
+    && ./configure \
+ 	--prefix=/usr/local/nginx \
+ 	#--prefix=/data/www \
+	--conf-path=/etc/nginx/nginx.conf \
+	--error-log-path=/var/log/nginx/error.log \
+        --http-log-path=/var/log/nginx/access.log \
+	--pid-path=/var/run/nginx.pid --lock-path=/var/lock/nginx.lock \
         --user=nginx --group=nginx --with-http_ssl_module --with-http_flv_module --with-http_stub_status_module \
         --with-http_gzip_static_module --http-client-body-temp-path=/tmp/nginx/client/ \
         --http-proxy-temp-path=/tmp/nginx/proxy/ \
