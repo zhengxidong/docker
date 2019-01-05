@@ -34,6 +34,7 @@ RUN yum install vim wget git net-tools -y \
     && yum install python-setuptools -y \
     && easy_install supervisor \
     && yum install openssh-server -y \
+    && yum install libgearman-devel -y \
     && echo PermitRootLogin  yes >> /etc/ssh/sshd_config \
     && echo PasswordAuthentication yes >> /etc/ssh/sshd_config \
     && echo RSAAuthentication yes >> etc/ssh/sshd_config \
@@ -97,9 +98,27 @@ RUN cd /usr/src \
     && sed -i "s/dirname(__FILE__) . '\/..\/xhprof_lib'/'xhprof_lib'/" /var/tools/xhprof_html/index.php \
     && sed -i "s/dirname(__FILE__) . '\/..\/xhprof_lib'/'xhprof_lib'/" /var/tools/xhprof_html/callgraph.php \
     && sed -i "s/dirname(__FILE__) . '\/..\/xhprof_lib'/'xhprof_lib'/" /var/tools/xhprof_html/typeahead.php \
-    && rm -rf /usr/src/xhprof-${XHPROF_VER} && rm -rf /usr/src/xhprof.tar.gz
+    && rm -rf /usr/src/xhprof-${XHPROF_VER} && rm -rf /usr/src/xhprof.tar.gz \
+    && cd /usr/src \
+    && wget https://github.com/wcgallego/pecl-gearman/archive/gearman-2.0.3.tar.gz && tar -zxvf gearman-2.0.3.tar.gz\
+    && cd pecl-gearman-gearman-2.0.3 \
+    && /usr/local/php/bin/phpize \
+    && ./configure --with-php-config=/usr/local/php/bin/php-config \
+    && make && make install \
+    && echo "extension=gearman.so" >> /etc/php/php.ini && rm -rf /usr/src/pecl-gearman-gearman-2.0.3 && rm /usr/src/gearman-2.0.3.tar.gz
 
-
+    #php xdebug
+RUN /usr/local/php/bin/pecl install xdebug 
+#RUN cd /usr/src \
+#    && curl  'https://xdebug.org/files/xdebug-2.6.0.tgz' -o xdebug.tar.gz \
+#    && mkdir xdebug \
+#    && tar -xvzf xdebug.tar.gz -C xdebug --strip-components=1 \
+#    && cd xdebug \
+#    && /usr/local/php/bin/phpize \
+#    && ./configure --with-php-config=/usr/local/php/bin/php-config --enable-xdebug \
+#    && make \
+#    && make install \
+#    && rm -rf /usr/src/xdebug.tar.gz && rm -rf /usr/src/xdebug
 
 #安装nginx
 RUN cd /usr/src \
@@ -143,6 +162,7 @@ RUN cd /usr/src \
     && mkdir -m 777 -p /var/log/nginx \
     && rm -rf /usr/src/nginx.tar.gz && rm -rf /usr/src/nginx
 
+
 #安装必要的服务
 #RUN cd /usr/src \
 #    && /usr/local/php/bin/php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
@@ -184,6 +204,6 @@ RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 
 
 EXPOSE 80
-
-
+EXPOSE 9001
+EXPOSE 9000
 CMD ["/usr/bin/supervisord"]
