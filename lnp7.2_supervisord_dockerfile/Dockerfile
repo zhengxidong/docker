@@ -55,7 +55,7 @@ RUN cd /usr/src \
     && ./configure --prefix=/usr/local/php --with-config-file-path=/etc/php --enable-soap --enable-mbstring=all \
         --enable-sockets --enable-fpm --with-gd --with-freetype-dir=/usr/include/freetype2/freetype \
         --with-jpeg-dir=/usr/lib64 --with-zlib --with-iconv --enable-libxml --enable-xml  --enable-intl \
-        --enable-zip --enable-pcntl --enable-bcmath --enable-maintainer-zts --with-curl --with-mcrypt --with-openssl \
+        --enable-zip --enable-pcntl --enable-bcmath --enable-maintainer-zts --with-curl --with-openssl \
         --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd \
     && make \
     && make install \
@@ -75,6 +75,10 @@ RUN cd /usr/src \
     && rm -rf /usr/src/php.tar.gz && rm -rf /usr/src/php \
     #php redis扩展
     && /usr/local/php/bin/pecl install redis && echo "extension=redis.so" >> /etc/php/php.ini \
+    #php grpc扩展
+    && /usr/local/php/bin/pecl install grpc && echo "extension=grpc.so" >> /etc/php/php.ini \
+    #php protobuf扩展
+    && /usr/local/php/bin/pecl install protobuf && echo "extension=protobuf.so" >> /etc/php/php.ini \
     #php swoole扩展
     && cd /usr/src && curl -o hiredis.tar.gz https://github.com/redis/hiredis/archive/v${HIREDIS_VER}.tar.gz -L && mkdir hiredis && tar -xzvf hiredis.tar.gz -C ./hiredis --strip-components 1 \
     && cd hiredis && make && make install && mkdir /usr/lib/hiredis && cp libhiredis.so /usr/lib/hiredis && mkdir /usr/include/hiredis && cp hiredis.h /usr/include/hiredis \
@@ -99,6 +103,7 @@ RUN cd /usr/src \
     && sed -i "s/dirname(__FILE__) . '\/..\/xhprof_lib'/'xhprof_lib'/" /var/tools/xhprof_html/callgraph.php \
     && sed -i "s/dirname(__FILE__) . '\/..\/xhprof_lib'/'xhprof_lib'/" /var/tools/xhprof_html/typeahead.php \
     && rm -rf /usr/src/xhprof-${XHPROF_VER} && rm -rf /usr/src/xhprof.tar.gz \
+    #php gearman扩展
     && cd /usr/src \
     && wget https://github.com/wcgallego/pecl-gearman/archive/gearman-2.0.3.tar.gz && tar -zxvf gearman-2.0.3.tar.gz\
     && cd pecl-gearman-gearman-2.0.3 \
