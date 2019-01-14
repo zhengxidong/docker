@@ -209,6 +209,6 @@ RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 
 
 EXPOSE 80
-EXPOSE 9001
-EXPOSE 9000
+#EXPOSE 9001
+#EXPOSE 9000
 CMD ["/usr/bin/supervisord"]
