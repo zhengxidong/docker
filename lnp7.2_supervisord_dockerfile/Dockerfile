@@ -113,7 +113,8 @@ RUN cd /usr/src \
     && echo "extension=gearman.so" >> /etc/php/php.ini && rm -rf /usr/src/pecl-gearman-gearman-2.0.3 && rm /usr/src/gearman-2.0.3.tar.gz
 
     #php xdebug
-RUN /usr/local/php/bin/pecl install xdebug 
+RUN /usr/local/php/bin/pecl install xdebug \
+    && echo -e "[xdebug]\nzend_extension=/usr/local/php/lib/php/extensions/no-debug-zts-20170718/xdebug.so\nxdebug.enable=1\nxdebug.remote_enable=1\nxdebug.remote_connect_back=0\nxdebug.remote_host=192.168.31.135\nxdebug.remote_port=9000\nxdebug.profiler_enable=1\nxdebug.remote_log=/var/log/xdebug_remote.log\nxdebug.remote_autostart = 1" 
 #RUN cd /usr/src \
 #    && curl  'https://xdebug.org/files/xdebug-2.6.0.tgz' -o xdebug.tar.gz \
 #    && mkdir xdebug \
