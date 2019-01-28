@@ -57,4 +57,5 @@ docker run -d -p 80:80 --name lnp7.2 -v /home/html:/usr/local/nginx/html zhengxi
 ```js
 /etc/php
 ```
+详细文档请查看[wiki](https://github.com/zhengxidong/docker-dev/wiki)
 
