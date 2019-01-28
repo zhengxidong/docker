@@ -1,5 +1,6 @@
-说明
-=================
+
+[TOC]
+
 
 
 ## lnp7.2_supervisord_dockerfile
@@ -8,9 +9,11 @@
 
 包含php, nginx, openssh server, crond, swoole服务。
 
-## 使用
+## 如何通过镜像运行一个开发容器
 
-### 拉取镜像
+### 可以拉取镜像或自己build一个镜像
+
+拉取镜像
 ```js
 docker pull zhengxidong/lnp7.2:1.0
 ```
@@ -35,9 +38,9 @@ docker run -d -p 80:80 --name lnp7.2 -v /home/html:/usr/local/nginx/html zhengxi
 ```js
 /home/html/itellyou.site
 ```
-#### 容器内
+## 容器内基本操作
 
-##### nginx
+### 如何操作nginx
 1. 站点根目录
 ```js
 /usr/local/nginx/html
@@ -52,7 +55,7 @@ docker run -d -p 80:80 --name lnp7.2 -v /home/html:/usr/local/nginx/html zhengxi
  /var/log/nginx
  ```
 
-##### php
+### 如何操作php
 
 1. php配置文件目录
 ```js
@@ -77,3 +80,5 @@ docker run -d -p 80:80 --name lnp7.2 -v /home/html:/usr/local/nginx/html zhengxi
 -c filename     : 设置配置文件（默认是：/usr/local/etc/nginx/nginx.conf）
 -g directives   : 设置配置文件外的全局指令
 ```
+### 如何通过使用xphrof分析代码性能
+
