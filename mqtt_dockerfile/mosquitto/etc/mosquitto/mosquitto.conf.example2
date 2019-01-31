@@ -1,0 +1,10 @@
+port 1883
+#listener 3001
+#protocol mqtt
+#protocol websockets
+#password_file /etc/mosquitto/passwdfile
+#allow_anonymous false
+cafile /etc/mosquitto/caCert.pem
+certfile /etc/mosquitto/serverCert.pem
+keyfile /etc/mosquitto/serverKey.pem
+tls_version tlsv1.2
