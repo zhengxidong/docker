@@ -26,7 +26,7 @@ RUN rm -rf libwebsockets* mosquitto-1.4.12*
 
 VOLUME ["/var/lib/mosquitto","/var/log/mosquitto","/etc/mosquitto"]
 
-EXPOSE 1883 3000
+EXPOSE 1883 1884 3000
 
 CMD ["/usr/sbin/init"]
 
