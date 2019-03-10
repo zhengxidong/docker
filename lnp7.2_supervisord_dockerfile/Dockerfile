@@ -200,7 +200,7 @@ RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo command=/usr/sbin/sshd -D >> /etc/supervisord.conf \
     \
     && echo [program:nginx] >> /etc/supervisord.conf \
-    && echo command=/usr/local/nginx/sbin/nginx >> /etc/supervisord.conf \
+    && echo command=/usr/local/nginx/sbin/nginx  >> /etc/supervisord.conf \
     \
     && echo [program:php-fpm] >> /etc/supervisord.conf \
     && echo command=/usr/local/php/sbin/php-fpm >> /etc/supervisord.conf \
@@ -210,6 +210,4 @@ RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 
 
 EXPOSE 80
-#EXPOSE 9001
-#EXPOSE 9000
 CMD ["/usr/bin/supervisord"]
