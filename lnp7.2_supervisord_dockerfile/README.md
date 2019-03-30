@@ -40,6 +40,6 @@ docker run -d -p 80:80 --name lnp7.2 -v /home/html/itellyou.site:/usr/local/ngin
 * -p 映射端口，容器80端口映射到宿主机80端口
 * -v 挂载目录，`/home/html/itellyou.site`表示宿主机目录,`/usr/local/nginx/html/itellyou.site`表示容器内站点目录
 
-容器内操作nginx、php，详细文档请查看[wiki](https://github.com/zhengxidong/docker-dev/wiki)
+容器内操作nginx、php、php-fpm，详细文档请查看[wiki](https://github.com/zhengxidong/docker-dev/wiki)
 
 
