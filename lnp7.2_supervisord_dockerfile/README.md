@@ -5,19 +5,19 @@
 
 包含php, nginx, openssh server, crond, swoole服务。
 
-## 如何通过镜像运行一个开发容器
-
 ### 获取镜像
 
 * 远程获取镜像(推荐)
 ```js
-docker pull zhengxidong/lnp7.2
-cd docker/lnp7.2_supervisord_dockerfile
+$ docker pull zhengxidong/lnp7.2
+$ git clone https://github.com/zhengxidong/docker.git
+$ cd docker/lnp7.2_supervisord_dockerfile
 ```
 * 构建镜像
 ```js
-cd docker/lnp7.2_supervisord_dockerfile
-./build_lnp7.2_images.sh
+$ https://github.com/zhengxidong/docker.git
+$ cd docker/lnp7.2_supervisord_dockerfile
+$ ./build_lnp7.2_images.sh
 ```
 
 ### 运行容器
