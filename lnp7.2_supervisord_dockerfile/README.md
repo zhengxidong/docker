@@ -45,19 +45,19 @@ docker run -d -p 80:80 --name lnp7.2 -v /home/html/itellyou.site:/usr/local/ngin
 ### 注意事项
 
 xdebug默认不开启，如需使用，进入容器修改`/etc/php/php.ini`文件,找到`xdebug`去掉`;`注释后保存。
-
+```js
 进入容器
-```js
 docker exec -it lnp7.2 bash
-```
 退出容器
-```js
 exit
-```
 重启容器
-```js
 docker restart lnp7.2
 ```
+或
 
+启动容器的时候把改好的php.ini文件挂载进去
+```js
+docker run -d -p 80:80 --name lnp7.2 -v /home/html/itellyou.site:/usr/local/nginx/html/itellyou.site -v /home/html/php/php.ini:/etc/php/php.ini zhengxidong/lnp7.2
+```
 
 
