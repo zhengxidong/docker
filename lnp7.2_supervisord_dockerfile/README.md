@@ -42,4 +42,22 @@ docker run -d -p 80:80 --name lnp7.2 -v /home/html/itellyou.site:/usr/local/ngin
 
 容器内操作nginx、php、php-fpm等命令，详细文档请查看[wiki](https://github.com/zhengxidong/docker-dev/wiki)
 
+### 注意事项
+
+xdebug默认不开启，如需使用，进入容器修改`/etc/php/php.ini`文件,找到`xdebug`去掉`;`注释后保存。
+
+进入容器
+```js
+docker exec -it lnp7.2 bash
+```
+退出容器
+```js
+exit
+```
+重启容器
+```js
+docker restart lnp7.2
+```
+
+
 
