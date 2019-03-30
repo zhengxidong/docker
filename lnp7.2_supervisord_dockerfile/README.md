@@ -7,55 +7,31 @@
 
 ## 如何通过镜像运行一个开发容器
 
-### 可以拉取镜像或自己build一个镜像
+### 获取镜像
 
-拉取镜像
+* 远程获取镜像(推荐)
 ```js
-docker pull zhengxidong/lnp7.2:1.0
+docker pull zhengxidong/lnp7.2
+cd docker/lnp7.2_supervisord_dockerfile
 ```
-
-### 创建目录(此目录为站点文件)
-
-  在home目录下创建站点目录
-
+* 构建镜像
 ```js
-mkdir /home/html/itellyou.site
+cd docker/lnp7.2_supervisord_dockerfile
+./build_lnp7.2_images.sh
 ```
 
 ### 运行容器
 
+执行shell脚本
+```js
+./run_lnp7.2_container.sh
+```
+或
 ```js
 docker run -d -p 80:80 --name lnp7.2 -v /home/html:/usr/local/nginx/html zhengxidong/lnp7.2:1.0
 ```
+注意：`80端口是否已经被占用，如已经占用，请换一个映射端口`
 
-#### 宿主机
+容器内操作nginx、php，详细文档请查看[wiki](https://github.com/zhengxidong/docker-dev/wiki)
 
-1. 站点目录(可自定义)
-```js
-/home/html/itellyou.site
-```
-## 容器内基本操作
-
-### 如何操作nginx
-1. 站点根目录
-```js
-/usr/local/nginx/html
-```
-2. 配置文件目录
-```js
-/etc/nginx
-```
-3. 日志目录
-
- ```js
- /var/log/nginx
- ```
-
-### 如何操作php
-
-1. php配置文件目录
-```js
-/etc/php
-```
-详细文档请查看[wiki](https://github.com/zhengxidong/docker-dev/wiki)
 
