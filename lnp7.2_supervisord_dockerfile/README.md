@@ -28,7 +28,7 @@ $ ./build_lnp7.2_images.sh
 ```
 或
 ```js
-docker build -d -p 8080 --name lnp7.2 zhengxidong/lnp7.2
+docker build -d -p 80:80 --name lnp7.2 zhengxidong/lnp7.2
 ```
 或
 ```js
