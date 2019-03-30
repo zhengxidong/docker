@@ -10,8 +10,6 @@
 * 远程获取镜像(推荐)
 ```js
 $ docker pull zhengxidong/lnp7.2
-$ git clone https://github.com/zhengxidong/docker.git
-$ cd docker/lnp7.2_supervisord_dockerfile
 ```
 * 构建镜像
 ```js
