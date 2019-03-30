@@ -4,6 +4,7 @@ ARG OS_VER=latest
 FROM centos:$OS_VER
 MAINTAINER zxd <zhenxidog@163.com>
 
+# 设置环境变量
 ENV PHP_PATH /usr/local/php/bin
 
 ENV NGINX_PATH /usr/local/nginx/sbin
