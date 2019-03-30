@@ -28,9 +28,14 @@ $ ./build_lnp7.2_images.sh
 ```
 或
 ```js
-docker run -d -p 80:80 --name lnp7.2 -v /home/html/itellyou.site:/usr/local/nginx/html/itellyou.site zhengxidong/lnp7.2:1.0
+docker build -d -p 8080 --name lnp7.2 zhengxidong/lnp7.2
+```
+或
+```js
+docker run -d -p 80:80 --name lnp7.2 -v /home/html/itellyou.site:/usr/local/nginx/html/itellyou.site zhengxidong/lnp7.2
 ```
 注意：`80端口是否已经被占用，如已经占用，请换一个映射端口`
+
 参数说明
 * -d 后台运行
 * --name 容器名称
