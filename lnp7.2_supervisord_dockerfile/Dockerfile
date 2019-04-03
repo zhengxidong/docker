@@ -4,6 +4,11 @@ ARG OS_VER=latest
 FROM centos:$OS_VER
 MAINTAINER zxd <zhenxidog@163.com>
 
+ENV PHP_PATH /usr/local/php/bin
+
+ENV NGINX_PATH /usr/local/nginx/sbin
+
+ENV PATH $PATH:$NGINX_PATH:$PHP_PATH
 
 #root用户密码
 ARG ROOT_PASSWORD=123456
@@ -52,7 +57,9 @@ RUN cd /usr/src \
     && mkdir php \
     && tar -xzvf php.tar.gz -C ./php --strip-components 1 \
     && cd php \
-    && ./configure --prefix=/usr/local/php --with-config-file-path=/etc/php --enable-soap --enable-mbstring=all \
+    && ./configure \
+	--prefix=/usr/local/php \
+	--with-config-file-path=/etc/php --enable-soap --enable-mbstring=all \
         --enable-sockets --enable-fpm --with-gd --with-freetype-dir=/usr/include/freetype2/freetype \
         --with-jpeg-dir=/usr/lib64 --with-zlib --with-iconv --enable-libxml --enable-xml  --enable-intl \
         --enable-zip --enable-pcntl --enable-bcmath --enable-maintainer-zts --with-curl --with-openssl \
@@ -70,11 +77,15 @@ RUN cd /usr/src \
     && cp php-fpm.conf.default php-fpm.conf \
     && sed -i "s/;daemonize = yes/daemonize = no/" php-fpm.conf \
     && cp ./php-fpm.d/www.conf.default ./php-fpm.d/www.conf \
-    && sed -i "s/export PATH/PATH=\/usr\/local\/php\/bin:\$PATH\nexport PATH/" /etc/profile \
-    && sed -i "s/export PATH/PATH=\/etc\/init.d:\$PATH\nexport PATH/" /etc/profile \
-    && rm -rf /usr/src/php.tar.gz && rm -rf /usr/src/php \
-    #php redis扩展
-    && /usr/local/php/bin/pecl install redis && echo "extension=redis.so" >> /etc/php/php.ini \
+    #&& sed -i "s/export PATH/PATH=\/usr\/local\/php\/bin:\$PATH\nexport PATH/" /etc/profile \
+    #&& sed -i "s/export PATH/PATH=\/usr\/local\/php\/sbin:\$PATH\nexport PATH/" /etc/profile \
+    #&& sed -i "s/export PATH/PATH=\/etc\/init.d:\$PATH\nexport PATH/" /etc/profile \
+    #&& source /etc/profile \
+    && rm -rf /usr/src/php.tar.gz && rm -rf /usr/src/php 
+
+# 安装php扩展
+#php redis扩展
+RUN /usr/local/php/bin/pecl install redis && echo "extension=redis.so" >> /etc/php/php.ini \
     #php grpc扩展
     && /usr/local/php/bin/pecl install grpc && echo "extension=grpc.so" >> /etc/php/php.ini \
     #php protobuf扩展
@@ -112,19 +123,9 @@ RUN cd /usr/src \
     && make && make install \
     && echo "extension=gearman.so" >> /etc/php/php.ini && rm -rf /usr/src/pecl-gearman-gearman-2.0.3 && rm /usr/src/gearman-2.0.3.tar.gz
 
-    #php xdebug
+#php xdebug
 RUN /usr/local/php/bin/pecl install xdebug \
-    && echo -e "[xdebug]\nzend_extension=/usr/local/php/lib/php/extensions/no-debug-zts-20170718/xdebug.so\nxdebug.enable=1\nxdebug.remote_enable=1\nxdebug.remote_connect_back=0\nxdebug.remote_host=192.168.31.135\nxdebug.remote_port=9000\nxdebug.profiler_enable=1\nxdebug.remote_log=/var/log/xdebug_remote.log\nxdebug.remote_autostart = 1" 
-#RUN cd /usr/src \
-#    && curl  'https://xdebug.org/files/xdebug-2.6.0.tgz' -o xdebug.tar.gz \
-#    && mkdir xdebug \
-#    && tar -xvzf xdebug.tar.gz -C xdebug --strip-components=1 \
-#    && cd xdebug \
-#    && /usr/local/php/bin/phpize \
-#    && ./configure --with-php-config=/usr/local/php/bin/php-config --enable-xdebug \
-#    && make \
-#    && make install \
-#    && rm -rf /usr/src/xdebug.tar.gz && rm -rf /usr/src/xdebug
+    && echo -e ";[xdebug]\n;zend_extension=/usr/local/php/lib/php/extensions/no-debug-zts-20170718/xdebug.so\n;xdebug.enable=1\n;xdebug.remote_enable=1\n;xdebug.remote_connect_back=0\n;xdebug.remote_host=192.168.31.135\n;xdebug.remote_port=9000\n;xdebug.profiler_enable=1\n;xdebug.remote_log=/var/log/xdebug_remote.log\n;xdebug.remote_autostart = 1" >> /etc/php/php.ini 
 
 #安装nginx
 RUN cd /usr/src \
@@ -133,7 +134,6 @@ RUN cd /usr/src \
     && cd nginx \
     && ./configure \
  	--prefix=/usr/local/nginx \
- 	#--prefix=/data/www \
 	--conf-path=/etc/nginx/nginx.conf \
 	--error-log-path=/var/log/nginx/error.log \
         --http-log-path=/var/log/nginx/access.log \
@@ -166,7 +166,9 @@ RUN cd /usr/src \
     && echo "<?php phpinfo()?>" > /usr/local/nginx/html/index.php \
     && rm -rf /etc/nginx && cp -rf /usr/src/etc/nginx /etc/nginx \
     && mkdir -m 777 -p /var/log/nginx \
-    && rm -rf /usr/src/nginx.tar.gz && rm -rf /usr/src/nginx
+    && rm -rf /usr/src/nginx.tar.gz && rm -rf /usr/src/nginx 
+    # 设置nginx环境变量
+    #&& export PATH=$PATH:/usr/local/nginx/sbin
 
 
 #安装必要的服务
@@ -188,6 +190,7 @@ RUN cd /usr/src \
 #    && rm -rf /usr/src/phpmyadmin.tar.gz
 
 
+
 #服务器基础设置
 RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezonesource \
@@ -200,7 +203,7 @@ RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo command=/usr/sbin/sshd -D >> /etc/supervisord.conf \
     \
     && echo [program:nginx] >> /etc/supervisord.conf \
-    && echo command=/usr/local/nginx/sbin/nginx >> /etc/supervisord.conf \
+    && echo command=/usr/local/nginx/sbin/nginx  >> /etc/supervisord.conf \
     \
     && echo [program:php-fpm] >> /etc/supervisord.conf \
     && echo command=/usr/local/php/sbin/php-fpm >> /etc/supervisord.conf \
@@ -210,6 +213,4 @@ RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 
 
 EXPOSE 80
-#EXPOSE 9001
-#EXPOSE 9000
 CMD ["/usr/bin/supervisord"]
