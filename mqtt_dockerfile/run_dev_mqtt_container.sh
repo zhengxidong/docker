@@ -3,7 +3,11 @@
 # -v /workplace/mosquitto/data/persistence_data/:/var/lib/mosquitto/ \
 # -v /mosquitto/log/:/var/log/mosquitto/ \
 # /usr/sbin/mosquitto -c /etc/mosquitto/mosquitto.conf
-# 
+#
+
+docker stop dev_mqtt
+
+docker rm dev_mqtt 
 docker run -d --name dev_mqtt \
         --privileged=true \
         --restart=always \

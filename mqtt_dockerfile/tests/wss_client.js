@@ -1,8 +1,10 @@
 const mqtt = require('mqtt');
  
 const clientId = 'mqttws_' + Math.random().toString(16).substr(2, 8)
-//const host = 'wss://192.6.1.74:3004/mqtt'
-const host = 'wss://itellyou.site/mqtt'
+//const host = 'wss://itellyou.site/mqtt'
+//const host = 'wss://itellyou.site'
+const host = 'wss://mqtt2.66park.net/mqtt'
+//const host = 'ws://125.74.48.239'
 var options = {
     keepalive: 60,
     clientId: clientId,
@@ -17,13 +19,15 @@ var options = {
         qos: 0,
         retain: false
     },
-    username: 'admin',
-    password: '123456',
+    username: 'adminprod',
+    //username: 'admin',
+    password: 'w83R33d1',
+    //password: '123456',
     rejectUnauthorized: false
 }
  
 var client = mqtt.connect(host, options)
- 
+
 client.on('error', function (err) {
     console.log(err)
     client.end()
