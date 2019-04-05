@@ -126,7 +126,7 @@ RUN /usr/local/php/bin/pecl install redis && echo "extension=redis.so" >> /etc/p
 
 #php xdebug
 RUN /usr/local/php/bin/pecl install xdebug \
-    && echo -e ";[xdebug]\n;zend_extension=/usr/local/php/lib/php/extensions/no-debug-zts-20170718/xdebug.so\n;xdebug.enable=1\n;xdebug.remote_enable=1\n;xdebug.remote_connect_back=0\n;xdebug.remote_host=192.168.31.135\n;xdebug.remote_port=9000\n;xdebug.profiler_enable=1\n;xdebug.remote_log=/var/log/xdebug_remote.log\n;xdebug.remote_autostart = 1" >> /etc/php/php.ini 
+    && echo -e ";[xdebug]\n;zend_extension=/usr/local/php/lib/php/extensions/no-debug-zts-20170718/xdebug.so\n;xdebug.enable=1\n;xdebug.remote_enable=1\n;xdebug.remote_connect_back=0\n;xdebug.remote_host=192.168.31.135\n;xdebug.remote_port=9000\n;xdebug.profiler_enable=1\n;xdebug.remote_log=/tmp/xdebug_remote.log\n;xdebug.remote_autostart = 1" >> /etc/php/php.ini 
 
 #安装nginx
 RUN cd /usr/src \
