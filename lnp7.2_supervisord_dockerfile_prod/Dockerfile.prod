@@ -1,28 +1,16 @@
 ARG OS_VER=latest
 
-
 FROM centos:$OS_VER
 MAINTAINER zxd <zhenxidog@163.com>
 
-# 设置环境变量
-#ENV PHP_PATH /usr/local/php/bin
-
-#ENV NGINX_PATH /usr/local/nginx/sbin
-
-#ENV PATH $PATH:$NGINX_PATH
-
 #root用户密码
-ARG ROOT_PASSWORD=123456
+ARG ROOT_PASSWORD=zxd19950808
 #php版本,因为php版本间配置文件模板不相同，此处的版本号只能为大于7.0以上版本
 ARG PHP_VER=7.2.8
 #nginx版本
 ARG NGINX_VER=1.15.2
 #xhprof版本
 ARG XHPROF_VER=1.2
-#hiredis版本
-ARG HIREDIS_VER=0.13.3
-#swoole版本
-ARG SWOOLE_VER=4.0.4
 
 
 #映射配置文件
@@ -78,26 +66,11 @@ RUN cd /usr/src \
     && cp php-fpm.conf.default php-fpm.conf \
     && sed -i "s/;daemonize = yes/daemonize = no/" php-fpm.conf \
     && cp ./php-fpm.d/www.conf.default ./php-fpm.d/www.conf \
-    #&& sed -i "s/export PATH/PATH=\/usr\/local\/php\/bin:\$PATH\nexport PATH/" /etc/profile \
-    #&& sed -i "s/export PATH/PATH=\/usr\/local\/php\/sbin:\$PATH\nexport PATH/" /etc/profile \
-    #&& sed -i "s/export PATH/PATH=\/etc\/init.d:\$PATH\nexport PATH/" /etc/profile \
-    #&& source /etc/profile \
     && rm -rf /usr/src/php.tar.gz && rm -rf /usr/src/php 
 
 # 安装php扩展
 #php redis扩展
 RUN /usr/local/php/bin/pecl install redis && echo "extension=redis.so" >> /etc/php/php.ini \
-    #php grpc扩展
-    && /usr/local/php/bin/pecl install grpc && echo "extension=grpc.so" >> /etc/php/php.ini \
-    #php protobuf扩展
-    && /usr/local/php/bin/pecl install protobuf && echo "extension=protobuf.so" >> /etc/php/php.ini \
-    #php swoole扩展
-    && cd /usr/src && curl -o hiredis.tar.gz https://github.com/redis/hiredis/archive/v${HIREDIS_VER}.tar.gz -L && mkdir hiredis && tar -xzvf hiredis.tar.gz -C ./hiredis --strip-components 1 \
-    && cd hiredis && make && make install && mkdir /usr/lib/hiredis && cp libhiredis.so /usr/lib/hiredis && mkdir /usr/include/hiredis && cp hiredis.h /usr/include/hiredis \
-    && echo '/usr/local/lib' >> /etc/ld.so.conf && ldconfig \
-    && /usr/local/php/bin/pecl download swoole-${SWOOLE_VER} && tar -zxvf swoole-${SWOOLE_VER}.tgz && cd swoole-${SWOOLE_VER} \
-    && /usr/local/php/bin/phpize && ./configure --with-php-config=/usr/local/php/bin/php-config --enable-openssl --enable-async-redis && make && make install \
-    && echo "extension=swoole.so" >> /etc/php/php.ini && rm -rf /usr/src/hiredis.tar.gz && rm -rf /usr/src/hiredis && rm -rf swoole-${SWOOLE_VER}.tgz && rm -rf swoole-${SWOOLE_VER} \
     #php xhprof扩展
     && cd /usr/src \
     && curl -o xhprof.tar.gz https://github.com/longxinH/xhprof/archive/v${XHPROF_VER}.tar.gz -L \
@@ -114,19 +87,7 @@ RUN /usr/local/php/bin/pecl install redis && echo "extension=redis.so" >> /etc/p
     && sed -i "s/dirname(__FILE__) . '\/..\/xhprof_lib'/'xhprof_lib'/" /var/tools/xhprof_html/index.php \
     && sed -i "s/dirname(__FILE__) . '\/..\/xhprof_lib'/'xhprof_lib'/" /var/tools/xhprof_html/callgraph.php \
     && sed -i "s/dirname(__FILE__) . '\/..\/xhprof_lib'/'xhprof_lib'/" /var/tools/xhprof_html/typeahead.php \
-    && rm -rf /usr/src/xhprof-${XHPROF_VER} && rm -rf /usr/src/xhprof.tar.gz \
-    #php gearman扩展
-    && cd /usr/src \
-    && wget https://github.com/wcgallego/pecl-gearman/archive/gearman-2.0.3.tar.gz && tar -zxvf gearman-2.0.3.tar.gz\
-    && cd pecl-gearman-gearman-2.0.3 \
-    && /usr/local/php/bin/phpize \
-    && ./configure --with-php-config=/usr/local/php/bin/php-config \
-    && make && make install \
-    && echo "extension=gearman.so" >> /etc/php/php.ini && rm -rf /usr/src/pecl-gearman-gearman-2.0.3 && rm /usr/src/gearman-2.0.3.tar.gz
-
-#php xdebug
-RUN /usr/local/php/bin/pecl install xdebug \
-    && echo -e ";[xdebug]\n;zend_extension=/usr/local/php/lib/php/extensions/no-debug-zts-20170718/xdebug.so\n;xdebug.remote_enable=1\n;xdebug.remote_connect_back=0\n;xdebug.remote_host=192.168.31.135\n;xdebug.remote_port=9000\n;xdebug.remote_log=/tmp/xdebug_remote.log\n;xdebug.remote_autostart = 1" >> /etc/php/php.ini 
+    && rm -rf /usr/src/xhprof-${XHPROF_VER} && rm -rf /usr/src/xhprof.tar.gz 
 
 #安装nginx
 RUN cd /usr/src \
@@ -168,26 +129,6 @@ RUN cd /usr/src \
     && rm -rf /etc/nginx && cp -rf /usr/src/etc/nginx /etc/nginx \
     && mkdir -m 777 -p /var/log/nginx \
     && rm -rf /usr/src/nginx.tar.gz && rm -rf /usr/src/nginx 
-
-
-#安装必要的服务
-#RUN cd /usr/src \
-#    && /usr/local/php/bin/php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-#    && /usr/local/php/bin/php composer-setup.php  --install-dir=/usr/local/bin --filename=composer \
-#    && rm -rf composer-setup.php \
-#    && /usr/local/php/bin/php /usr/local/bin/composer config -g repo.packagist composer https://packagist.phpcomposer.com \
-#    && /usr/local/php/bin/php /usr/local/bin/composer create-project -s dev erik-dubbelboer/php-redis-admin /var/tools/phpredisadmin -vvv \
-#    && cd /var/tools/phpredisadmin && cp includes/config.sample.inc.php includes/config.inc.php \
-#    && sed -i "s/=> 'local server'/=> 'feehi server'/" includes/config.inc.php \
-#    && sed -i "s/\/\/'auth' => 'redispasswordhere'/'auth' => '${REDIS_PASS}'/" includes/config.inc.php \
-#    && sed -i "s/'scansize' => 1000/'scansize' => 1000,\n'login' => array('admin' => array('password' => '${REDIS_PASS}')),/" includes/config.inc.php \
-#    && rm -rf /root/.composer/cache/ \
-#    && cd /usr/src \
-#    && curl -o phpmyadmin.tar.gz https://files.phpmyadmin.net/phpMyAdmin/${PHPMYADMIN_VER}/phpMyAdmin-${PHPMYADMIN_VER}-all-languages.tar.gz \
-#    && mkdir -p /var/tools/phpmyadmin \
-#    && tar -xzvf phpmyadmin.tar.gz -C /var/tools/phpmyadmin --strip-components 1 \
-#    && rm -rf /usr/src/phpmyadmin.tar.gz
-
 
 
 #服务器基础设置
