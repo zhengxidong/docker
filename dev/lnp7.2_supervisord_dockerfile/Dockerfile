@@ -14,7 +14,7 @@ MAINTAINER zxd <zhenxidog@163.com>
 #root用户密码
 ARG ROOT_PASSWORD=123456
 #php版本,因为php版本间配置文件模板不相同，此处的版本号只能为大于7.0以上版本
-ARG PHP_VER=7.2.8
+ARG PHP_VER=7.2.17
 #nginx版本
 ARG NGINX_VER=1.15.2
 #xhprof版本
@@ -54,7 +54,8 @@ RUN yum install vim wget git net-tools -y \
 
 #安装php
 RUN cd /usr/src \
-    && curl -o php.tar.gz http://php.net/get/php-${PHP_VER}.tar.gz/from/this/mirror -L \
+    #&& curl -o php.tar.gz http://php.net/get/php-${PHP_VER}.tar.gz/from/this/mirror -L \
+    && curl -o php.tar.gz https://www.php.net/distributions/php-${PHP_VER}.tar.gz -L \
     && mkdir php \
     && tar -xzvf php.tar.gz -C ./php --strip-components 1 \
     && cd php \
@@ -171,11 +172,11 @@ RUN cd /usr/src \
 
 
 #安装必要的服务
-#RUN cd /usr/src \
-#    && /usr/local/php/bin/php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-#    && /usr/local/php/bin/php composer-setup.php  --install-dir=/usr/local/bin --filename=composer \
-#    && rm -rf composer-setup.php \
-#    && /usr/local/php/bin/php /usr/local/bin/composer config -g repo.packagist composer https://packagist.phpcomposer.com \
+RUN cd /usr/src \
+    && /usr/local/php/bin/php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && /usr/local/php/bin/php composer-setup.php  --install-dir=/usr/local/bin --filename=composer \
+    && rm -rf composer-setup.php \
+    && /usr/local/php/bin/php /usr/local/bin/composer config -g repo.packagist composer https://packagist.phpcomposer.com 
 #    && /usr/local/php/bin/php /usr/local/bin/composer create-project -s dev erik-dubbelboer/php-redis-admin /var/tools/phpredisadmin -vvv \
 #    && cd /var/tools/phpredisadmin && cp includes/config.sample.inc.php includes/config.inc.php \
 #    && sed -i "s/=> 'local server'/=> 'feehi server'/" includes/config.inc.php \
